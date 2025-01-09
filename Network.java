@@ -56,11 +56,11 @@ public class Network {
     public boolean addFollowee(String name1, String name2) {
         User user1 = getUser(name1);
         User user2 = getUser(name2);
-       if (user1 == null || user2 == null) { 
-        return false;
+        if (user1 == null || user2 == null || name1.equals(name2)) {  
+            return false;
+        }
+        return user1.addFollowee(user2.getName());
     }
-    return user1.addFollowee(user2.getName());
-}
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
      *  the user that has the maximal mutual number of followees as the user with the given name. */
@@ -116,10 +116,10 @@ public class Network {
 
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
-            StringBuilder sb = new StringBuilder("Network:\n");
-            for (int i = 0; i < userCount; i++) {
-                sb.append(users[i].toString()).append("\n");
-            }
-            return sb.toString();
-        }
+    StringBuilder sb = new StringBuilder("Network:");
+    for (int i = 0; i < userCount; i++) {
+        sb.append("\n").append(users[i].toString().trim());  
+    }
+    return sb.toString();
+}
 }
